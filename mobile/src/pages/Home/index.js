@@ -1,11 +1,45 @@
 
-import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
 
 import Nav from '../../components/Nav';
+import styles from './styles';
+import API from '../../services/api';
+import axios from 'axios';
 
 
 export default function Home() {
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        async function getTouristPoints() {
+
+            try {
+                const response = await API.get('/tourist-points/')
+                console.log('Busca de pontos efetuada:', response.data)
+                setData(response.data)
+            } catch (e) {
+                console.log('Erro ao realizar busca de dados.')
+            }
+        }
+
+        getTouristPoints();
+    }, [])
+
+    async function favoritePoint(item) {
+        const dataFavorite = {
+            point: item.id,
+            user: 1,
+        }
+
+        try {
+            const response = await API.post('/favorites/', dataFavorite)
+            console.log('Sucesso ao favoritar')
+        } catch {
+            console.log('erro ao favoritar')
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -68,175 +102,58 @@ export default function Home() {
             </View>
 
             <View style={styles.areaDestaques}>
-                <TouchableOpacity style={styles.areaPontoTur}>
-                    <Image
-                        source={require('../../../assets/ponte-estaiada.png')}
-                        style={styles.imgPontoTur}
-                    />
+                <FlatList
+                    horizontal={true}
+                    data={data}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity style={styles.areaPontoTur}>
+                            <Image
+                                source={{ uri: item.image }}
+                                style={styles.imgPontoTur}
+                            />
 
-                    <View style={{ padding: 10, gap: 5, }}>
-                        <Text style={styles.tituloPontoTur}>Ponto Turístico</Text>
-                        <Text style={styles.subtituloPontoTur}>Cidade</Text>
-                    </View>
+                            <View style={{ padding: 10, gap: 5, }}>
+                                <Text style={styles.tituloPontoTur}>{item.name}</Text>
+                                <Text style={styles.subtituloPontoTur}>{item.city_name}</Text>
+                            </View>
 
-                    <TouchableOpacity style={{ width: 25, height: 25, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }}>
-                        <Ionicons name='heart-outline' size={15} />
-                    </TouchableOpacity>
-                </TouchableOpacity>
+                            <TouchableOpacity style={{ width: 25, height: 25, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }} onPress={() => favoritePoint(item)}>
+                                <Ionicons name='heart-outline' size={15} />
+                            </TouchableOpacity>
+                        </TouchableOpacity>
+                    }
+                />
+
             </View>
 
             <View style={styles.areaPopulares}>
                 <Text style={styles.subtituloCategoria}>Populares</Text>
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity style={styles.pontoPopular}>
+                            <Image
+                                source={{
+                                    uri: item.image
+                                }}
+                                style={styles.imgPopulares}
+                            />
 
-                <TouchableOpacity style={styles.pontoPopular}>
-                    <Image
-                        source={require('../../../assets/ponte-estaiada.png')}
-                        style={styles.imgPopulares}
-                    />
+                            <View style={{ padding: 10, gap: 5, }}>
+                                <Text style={styles.tituloPontoTur}>{item.name}</Text>
+                                <Text style={styles.subtituloPontoTur}>{item.city_name}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    }
+                />
 
-                    <View style={{ padding: 10, gap: 5, }}>
-                        <Text style={styles.tituloPontoTur}>Ponto Turístico</Text>
-                        <Text style={styles.subtituloPontoTur}>Cidade</Text>
-                    </View>
-                </TouchableOpacity>
 
-                <TouchableOpacity style={styles.pontoPopular}>
 
-                    <Image
-                        source={require('../../../assets/ponte-estaiada.png')}
-                        style={styles.imgPopulares}
-                    />
-
-                    <View style={{ padding: 10, gap: 5, }}>
-                        <Text style={styles.tituloPontoTur}>Ponto Turístico</Text>
-                        <Text style={styles.subtituloPontoTur}>Cidade</Text>
-                    </View>
-                </TouchableOpacity>
+                
             </View>
 
-            <Nav/>
+            <Nav />
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#e1e1e1',
-        alignItems: 'center',
-        marginTop: 25,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between', 
-        alignItems: 'center',
-        paddingHorizontal: 20, 
-        marginVertical: 30, 
-        width: '100%', 
-    },
-    txtHeader: {
-        width: '70%',
-        gap: 10,
-    },
-    txt1Header: {
-        fontSize: 16,
-        fontWeight: 'regular',
-        color: '#000'
-    },
-    txt2Header: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#000',
-    },
-    perfilHeader: {
-        width: 60,
-        height: 60,
-        borderRadius: 60,
-        backgroundColor: "#0F5F87",
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    pesquisaArea: {
-        width: '100%',
-        paddingHorizontal: 20,
-        justifyContent: 'center',
-    },
-    inputPesquisa: {
-        backgroundColor: 'rgba(15, 95, 135, 0.38)',
-        borderRadius: 10,
-        height: 40,
-        paddingLeft: 40,
-    },
-    iconPesquisa: {
-        position: 'absolute',
-        left: 30,
-    },
-    subtituloCategoria: {
-        fontSize: 25,
-        color: '#3b3b3b',
-        fontWeight: "bold",
-    },
-    categoriaArea: {
-        width: '100%',
-        marginTop: 30,
-        paddingHorizontal: 20,
-    },
-    areaBtnCategoria: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 10,
-    },
-    btnCategoria: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 5,
-    },
-    areaDestaques: {
-        width: '100%',
-        marginTop: 30,
-        paddingHorizontal: 20,
-        justifyContent: 'space-between',
-    },
-    areaPontoTur: {
-        backgroundColor: '#fff',
-        width: 250,
-        borderRadius: 15,
-        elevation: 4,
-    },
-    imgPontoTur: {
-        width: '100%',
-        height: 100,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-    },
-    tituloPontoTur: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#3b3b3b'
-    },
-    subtituloPontoTur: {
-        fontSize: 10,
-        fontWeight: 'regular'
-    },
-    areaPopulares: {
-        width: '100%',
-        marginTop: 30,
-        paddingHorizontal: 20,
-        gap: 15,
-    },
-    pontoPopular: {
-        width: '100%',
-        flexDirection: 'row',
-        padding: 10,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        elevation: 2,
-    },
-    imgPopulares: {
-        width: 60,
-        height: 60,
-        borderRadius: 10,
-    }
-
-
-});

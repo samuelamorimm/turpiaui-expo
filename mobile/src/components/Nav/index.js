@@ -18,7 +18,7 @@ export default function Nav(){
                 <Ionicons name="home" color={"#fff"} size={25}/>                
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('favorites')}>
                 <Ionicons name="heart" color={"#fff"} size={25}/>                
             </TouchableOpacity>
 

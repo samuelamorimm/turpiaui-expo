@@ -6,6 +6,7 @@ import Initial from './src/pages/Initial';
 import Login from './src/pages/Login';
 import Register from './src/pages/Register';
 import Home from './src/pages/Home';
+import Favorites from './src/pages/Favorites';
 
 export default function App() {
 
@@ -14,12 +15,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='home' screenOptions={{
-        headerShown: false
+        headerShown: false,
+        animation: 'fade'
       }}>
         <Stack.Screen name='initial' component={Initial}/>
         <Stack.Screen name='login' component={Login}/>
         <Stack.Screen name='register' component={Register}/>
         <Stack.Screen name='home' component={Home}/>
+        <Stack.Screen name='favorites' component={Favorites}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
