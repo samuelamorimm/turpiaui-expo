@@ -92,19 +92,20 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 15,
     },
     tituloPontoTur: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#3b3b3b'
     },
     subtituloPontoTur: {
-        fontSize: 10,
-        fontWeight: 'regular'
+        fontSize: 12,
+        fontWeight: 'semibold'
     },
     areaPopulares: {
         width: '100%',
         marginTop: 30,
         paddingHorizontal: 20,
         gap: 15,
+        marginBottom: 100,
     },
     pontoPopular: {
         width: '100%',

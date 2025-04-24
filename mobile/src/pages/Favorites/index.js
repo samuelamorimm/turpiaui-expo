@@ -49,8 +49,8 @@ export default function Favorites() {
                                 <Text style={styles.subtituloPontoTur}>{item.city}</Text>
                             </View>
 
-                            <TouchableOpacity style={{ width: 25, height: 25, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }}>
-                                <Ionicons name='heart' size={15} />
+                            <TouchableOpacity style={{ width: 35, height: 35, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }}>
+                                <Ionicons name='heart' size={20} />
                             </TouchableOpacity>
                         </TouchableOpacity>
                     }

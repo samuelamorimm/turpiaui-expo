@@ -26,7 +26,7 @@ export default function Nav(){
                 <Ionicons name="map" color={"#fff"} size={25}/>                
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('profile')}>
                 <Ionicons name="person" color={"#fff"} size={25}/>                
             </TouchableOpacity>
         </View>
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
         height: 60,
         backgroundColor: '#041721',
         borderRadius: 10,
-        
         justifyContent: 'space-around',
         flexDirection: 'row',
         alignItems: 'center',

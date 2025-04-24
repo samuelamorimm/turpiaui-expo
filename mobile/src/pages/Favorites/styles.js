@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
     areaPontoTur: {
         backgroundColor: '#fff',
-        width: '80%',
+        width: '100%',
         borderRadius: 15,
         elevation: 4,
         width: '100%',
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 15,
     },
     tituloPontoTur: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#3b3b3b'
     },
     subtituloPontoTur: {
-        fontSize: 10,
-        fontWeight: 'regular'
+        fontSize: 15,
+        fontWeight: 'semibold'
     },
     areaFavorites: {
         width: '100%',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     flatFavorite: {
-        width: '80%',
+        width: '85%',
     }
 
 });

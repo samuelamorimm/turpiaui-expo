@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import API from '../../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -25,6 +26,8 @@ export default function Login() {
 
         try {
             const response = await API.post('/login/', data)
+            const token = response.data.token
+            await AsyncStorage.setItem('userToken', token)
             console.log('Login Realizado com sucesso, token:', response.data.token)
         } catch (e){
             console.error('Erro ao fazer login:', e.message);
