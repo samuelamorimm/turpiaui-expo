@@ -5,36 +5,30 @@ import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import Nav from '../../components/Nav';
+import SearchArea from '../../components/SearchArea';
 import styles from './styles';
 import API from '../../services/api';
 import axios from 'axios';
 import { favoritePoint } from '../../services/favorite';
+import { getTouristPoints } from '../../services/favorite';
 
 
 export default function Home() {
     const navigation = useNavigation();
     const [data, setData] = useState([])
 
-    async function getTouristPoints() {
 
-        try {
-            const response = await API.get('/tourist-points/')
-            console.log('Busca de pontos efetuada:', response.data)
-            setData(response.data)
-        } catch (e) {
-            console.log('Erro ao realizar busca de dados.')
-        }
-    }
+
 
     useEffect(() => {
-        getTouristPoints();
+        getTouristPoints(setData);
     }, [])
 
 
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                 <View style={styles.header}>
                     <View style={styles.txtHeader}>
                         <Text style={styles.txt1Header}>Olá, username!</Text>
@@ -47,16 +41,7 @@ export default function Home() {
                     </View>
                 </View>
 
-                <View style={styles.pesquisaArea}>
-                    <View style={styles.iconPesquisa}>
-                        <Ionicons name='search' color={'#0f5f87'} size={20} />
-                    </View>
-
-                    <TextInput
-                        style={styles.inputPesquisa}
-                        placeholder='Pesquise seu destino'
-                    />
-                </View>
+                <SearchArea />
 
                 <View style={styles.categoriaArea}>
                     <Text style={styles.subtituloCategoria}>Categorias</Text>

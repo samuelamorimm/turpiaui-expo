@@ -13,7 +13,14 @@ export default function Profile() {
     const navigation = useNavigation();
 
     async function logout() {
-        await AsyncStorage.removeItem('userToken')
+        try {
+            await AsyncStorage.removeItem('userToken')
+            navigation.navigate('initial')
+            
+        } catch (error) {
+            console.log('ERRO AO FAZER LOGOUT')
+        }
+
     }
 
     return (
