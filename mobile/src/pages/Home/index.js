@@ -21,7 +21,11 @@ export default function Home() {
 
 
     useEffect(() => {
-        getTouristPoints(setData);
+        async function saveData(params) {
+            const response = await getTouristPoints();
+            setData(response)
+        }
+        saveData();
     }, [])
 
 

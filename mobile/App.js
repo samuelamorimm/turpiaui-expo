@@ -12,6 +12,7 @@ import Favorites from './src/pages/Favorites';
 import DetailsPage from './src/pages/Details';
 import Profile from './src/pages/Profile';
 import SearchPage from './src/pages/SearchPage';
+import MapScreen from './src/pages/MapScreen';
 
 export default function App() {
 
@@ -52,6 +53,7 @@ export default function App() {
         <Stack.Screen name='search' component={SearchPage} />
         <Stack.Screen name='details' component={DetailsPage} />
         <Stack.Screen name='profile' component={Profile} />
+        <Stack.Screen name='maps' component={MapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

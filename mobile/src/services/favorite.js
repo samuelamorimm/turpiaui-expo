@@ -56,12 +56,12 @@ export async function favoritePoint(item, setData) {
     }
 }
 
- export async function getTouristPoints(setData) {
+ export async function getTouristPoints() {
 
     try {
         const response = await API.get('/tourist-points/')
         console.log('Busca de pontos efetuada:', response.data)
-        setData(response.data)
+        return response.data
     } catch (e) {
         console.log('Erro ao realizar busca de dados.')
     }

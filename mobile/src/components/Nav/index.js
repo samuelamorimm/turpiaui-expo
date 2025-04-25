@@ -22,7 +22,7 @@ export default function Nav(){
                 <Ionicons name="heart" color={"#fff"} size={25}/>                
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('maps')}>
                 <Ionicons name="map" color={"#fff"} size={25}/>                
             </TouchableOpacity>
 
