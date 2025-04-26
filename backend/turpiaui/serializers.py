@@ -22,7 +22,10 @@ class CategorySerializer(serializers.ModelSerializer):
 class FavoriteSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='point.name', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
-    city = serializers.CharField(source='point.city', read_only=True)
+    city_name = serializers.CharField(source='point.city', read_only=True)
+    latitude = serializers.CharField(source='point.latitude', read_only=True)
+    longitude = serializers.CharField(source='point.longitude', read_only=True)
+    description = serializers.CharField(source='point.description', read_only=True)
     image = serializers.SerializerMethodField()
 
     class Meta:

@@ -13,6 +13,7 @@ export default function SearchPage() {
   const route = useRoute();
   const { resultSearch } = route.params
   const [data, setData] = useState([])
+  const navigation = useNavigation();
 
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function SearchPage() {
           data={data}
           style={styles.flatSearch}
           renderItem={({ item }) =>
-            <TouchableOpacity style={styles.areaPontoTur}>
+            <TouchableOpacity style={styles.areaPontoTur} onPress={() => navigation.navigate('details', { item })}>
               <Image
                 source={{ uri: item.image }}
                 style={styles.imgPontoTur}

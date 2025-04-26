@@ -2,6 +2,7 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import API from '../../services/api';
 
 import Nav from '../../components/Nav';
@@ -10,14 +11,15 @@ import styles from './styles';
 
 export default function Favorites() {
     const [dataFavorites, setDataFavorites] = useState(null)
+    const navigation = useNavigation();
 
     useEffect(() => {
         async function getFavorites() {
 
             try {
                 const response = await API.get('/favorites/')
-                console.log('Busca de Favoritos efetuada:', response.data)
                 setDataFavorites(response.data)
+                console.log('Busca de Favoritos efetuada:', dataFavorites)
             } catch (e) {
                 console.log('Erro ao realizar busca de dados.')
             }
@@ -38,15 +40,15 @@ export default function Favorites() {
                     data={dataFavorites}
                     style={styles.flatFavorite}
                     renderItem={({ item }) =>
-                        <TouchableOpacity style={styles.areaPontoTur}>
+                        <TouchableOpacity style={styles.areaPontoTur} onPress={() => navigation.navigate('details', {item})}>
                             <Image
                                 source={{ uri: item.image }}
                                 style={styles.imgPontoTur}
                             /> 
-
+                                {item.description}
                             <View style={{ padding: 10, gap: 5, }}>
                                 <Text style={styles.tituloPontoTur}>{item.name}</Text>
-                                <Text style={styles.subtituloPontoTur}>{item.city}</Text>
+                                <Text style={styles.subtituloPontoTur}>{item.city_name}</Text>
                             </View>
 
                             <TouchableOpacity style={{ width: 35, height: 35, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }}>

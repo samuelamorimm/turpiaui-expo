@@ -44,20 +44,22 @@ export default function DetailsPage() {
                     </Text>
                 </View>
 
+                <View style={styles.hr}/>
+
                 <View style={styles.viewMap}>
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: item.latitude,
-                        longitude: item.longitude,
+                        latitude: parseFloat(item.latitude),
+                        longitude: parseFloat(item.longitude),
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01,
                     }}
                 >
                     <Marker
                         coordinate={{
-                            latitude: item.latitude,
-                            longitude: item.longitude,
+                            latitude: parseFloat(item.latitude),
+                            longitude: parseFloat(item.longitude),
                         }}
                         title={item.name}
                         description={item.city_name}
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e1e1e1',
         width: '100%',
         paddingBottom: 50,
+        flex: 1
     },
     scrollContent: {
         alignItems: 'center',
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 15,
         zIndex: 3,
-        marginTop: -30,
+        marginTop: -50,
         gap: 10,
         elevation: 2,
     },
@@ -131,30 +134,37 @@ const styles = StyleSheet.create({
     },
     areaDesc: {
         width: '100%',
-        paddingTop: 50,
-        paddingBottom: 15,
+        marginTop: 90,
     },
     titleDesc: {
+        fontSize: 20,
         marginLeft: 20,
         marginBottom: 10,
     },
     desc: {
-        fontSize: 15,
+        fontSize: 12,
         marginHorizontal: 35,
         textAlign: 'left',
         fontWeight: '400',
     },
     map: {
         width: '100%',
-        height: 200,
+        height: 180,
         borderRadius: 20,
         
     },
     viewMap: {
         borderWidth: 4,
         borderColor: '#0F5F87',
-        borderRadius: 8,
+        borderRadius: 6,
         alignSelf: 'center',
         width: '90%',
+    },
+    hr: {
+        width: '90%',
+        height: 2,
+        backgroundColor: '#b3b3b3',
+        alignSelf: 'center',
+        marginVertical: 20,
     }
 });

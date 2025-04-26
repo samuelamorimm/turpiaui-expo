@@ -11,19 +11,28 @@ import API from '../../services/api';
 import axios from 'axios';
 import { favoritePoint } from '../../services/favorite';
 import { getTouristPoints } from '../../services/favorite';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Home() {
     const navigation = useNavigation();
     const [data, setData] = useState([])
+    const [profileUser, setProfileUser] = useState('')
 
 
 
 
     useEffect(() => {
         async function saveData(params) {
-            const response = await getTouristPoints();
-            setData(response)
+            try{
+                const response = await getTouristPoints();
+                const name = await AsyncStorage.getItem('user')
+                setProfileUser(name)
+                setData(response)
+            }
+            catch{
+                console.log('Erro ao carregar pontos.')
+            }
         }
         saveData();
     }, [])
@@ -35,7 +44,7 @@ export default function Home() {
             <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
                 <View style={styles.header}>
                     <View style={styles.txtHeader}>
-                        <Text style={styles.txt1Header}>Olá, username!</Text>
+                        <Text style={styles.txt1Header}>Olá, {profileUser}!</Text>
                         <Text style={styles.txt2Header}>Explore diferentes
                             pontos turisticos do Piaui</Text>
                     </View>
@@ -52,6 +61,7 @@ export default function Home() {
 
 
                     <View style={styles.areaBtnCategoria}>
+                        
                         <TouchableOpacity style={styles.btnCategoria}>
                             <View style={{ width: 50, height: 50, borderRadius: 40, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', }}>
                                 <Ionicons name='star' size={32} color={"#000"} />
@@ -59,26 +69,7 @@ export default function Home() {
                             <Text style={styles.txtCategoria}>Populares</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnCategoria}>
-                            <View style={{ width: 50, height: 50, borderRadius: 40, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', }}>
-                                <Ionicons name='star' size={32} color={"#000"} />
-                            </View>
-                            <Text style={styles.txtCategoria}>Populares</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.btnCategoria}>
-                            <View style={{ width: 50, height: 50, borderRadius: 40, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', }}>
-                                <Ionicons name='star' size={32} color={"#000"} />
-                            </View>
-                            <Text style={styles.txtCategoria}>Populares</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.btnCategoria}>
-                            <View style={{ width: 50, height: 50, borderRadius: 40, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', }}>
-                                <Ionicons name='star' size={32} color={"#000"} />
-                            </View>
-                            <Text style={styles.txtCategoria}>Populares</Text>
-                        </TouchableOpacity>
+                        
                     </View>
                 </View>
 

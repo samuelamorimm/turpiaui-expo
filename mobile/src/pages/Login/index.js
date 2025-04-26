@@ -28,6 +28,7 @@ export default function Login() {
             const response = await API.post('/login/', data)
             const token = response.data.token
             await AsyncStorage.setItem('userToken', token)
+            await AsyncStorage.setItem('user', username)
             navigation.navigate('home')
             console.log('Login Realizado com sucesso, token:', response.data.token)
         } catch (e){
