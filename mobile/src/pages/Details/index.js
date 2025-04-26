@@ -2,7 +2,7 @@ import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Image, ScrollVi
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
-import styles from "../Home/styles";
+import styles from "./styles";
 
 export default function DetailsPage() {
     const route = useRoute();

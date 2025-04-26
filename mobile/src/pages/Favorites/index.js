@@ -45,7 +45,6 @@ export default function Favorites() {
                                 source={{ uri: item.image }}
                                 style={styles.imgPontoTur}
                             /> 
-                                {item.description}
                             <View style={{ padding: 10, gap: 5, }}>
                                 <Text style={styles.tituloPontoTur}>{item.name}</Text>
                                 <Text style={styles.subtituloPontoTur}>{item.city_name}</Text>
