@@ -60,6 +60,7 @@ export default function Profile() {
 
                 <TouchableOpacity
                     style={styles.option}
+                    onPress={() => navigation.navigate('favorites')}
                 >
                     <View style={styles.nameAndIcon}>
                         <Ionicons name='heart' size={25} color={'#3b3b3b'} />

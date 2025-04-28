@@ -27,15 +27,13 @@ export default function Login() {
         try {
             const response = await API.post('/login/', data)
             const token = response.data.token
-            const user = response.data.username
             await AsyncStorage.setItem('userToken', token)
-            await AsyncStorage.setItem('user', user)
             navigation.navigate('home')
             console.log('Login Realizado com sucesso, token:', response.data.token)
             console.log('Login Realizado com sucesso, user:', response.data.username)
         } catch (e){
             console.error('Erro ao fazer login:', e.message);
-            alert('Erro', 'Usuário ou senha incorretos.')
+            alert('Erro, Usuário ou senha incorretos.')
         }
     }
 

@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         elevation: 2,
-        marginBottom: 15,
     },
     imgPopulares: {
         width: 60,

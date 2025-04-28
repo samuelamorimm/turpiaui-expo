@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
       marginTop: 90,
   },
   titleDesc: {
-      fontSize: 20,
+      fontSize: 25,
       marginLeft: 20,
       marginBottom: 10,
   },
   desc: {
-      fontSize: 12,
+      fontSize: 14,
       marginHorizontal: 35,
       textAlign: 'left',
       fontWeight: '400',

@@ -52,16 +52,27 @@ export async function favoritePoint(item, setData) {
         }
 
     } catch (error) {
-        console.log('ERRO AO ATUALIZAR FAVORITAÇÃO')
+        alert('ERRO AO ATUALIZAR FAVORITAÇÃO')
     }
 }
 
- export async function getTouristPoints() {
+export async function getTouristPoints() {
 
     try {
         const response = await API.get('/tourist-points/')
         console.log('Busca de pontos efetuada:', response.data)
         return response.data
+    } catch (e) {
+        console.log('Erro ao realizar busca de dados.')
+    }
+}
+
+export async function getFavorites(setData) {
+
+    try {
+        const response = await API.get('/favorites/')
+        setData(response.data)
+        console.log('Busca de Favoritos efetuada:', response.data)
     } catch (e) {
         console.log('Erro ao realizar busca de dados.')
     }

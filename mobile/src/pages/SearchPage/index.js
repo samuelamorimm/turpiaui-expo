@@ -38,6 +38,22 @@ export default function SearchPage() {
     searchPoints();
   }, [resultSearch])
 
+  function searchResult() {
+    if (data.length > 0) {
+      return(<Text style={styles.resultText}>Resultados para
+        <Text style={{ fontStyle: 'italic', }}> "{resultSearch}": </Text>
+        {data.length}
+      </Text>)
+    } else {
+      return (
+        <>
+        <Ionicons name="sad" size={25} color={'#3b3b3b'} />
+        <Text style={styles.resultTextOps}>Ops... Não foi encontrado nenhum resultado para sua busca.</Text>
+        </>
+      )
+    }
+  }
+
 
 
   return (
@@ -47,7 +63,7 @@ export default function SearchPage() {
       </View>
 
       <View style={styles.resultArea}>
-        <Text style={styles.resultText}>Resultados para: {resultSearch}</Text>
+        {searchResult()}
       </View>
 
       <View style={styles.areaPointsResults}>
@@ -67,7 +83,7 @@ export default function SearchPage() {
               </View>
 
               <TouchableOpacity style={{ width: 35, height: 35, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: '#fff', position: 'absolute', top: 10, right: 10, }}>
-                <Ionicons name='heart' size={20} />
+                <Ionicons name={item.is_favorite ? 'heart' : 'heart-outline'} size={20} color={'#0F5F87'}/>
               </TouchableOpacity>
             </TouchableOpacity>
           }
@@ -93,11 +109,18 @@ const styles = StyleSheet.create({
     marginVertical: 30
   },
   resultArea: {
-    width: '100%',
-    paddingHorizontal: 30,
+    width: '90%',
+    gap: 15,
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
   resultText: {
     fontSize: 30,
+    color: '#3b3b3b',
+    fontWeight: 'semibold'
+  },
+  resultTextOps: {
+    fontSize: 20,
     color: '#3b3b3b',
     fontWeight: 'bold'
   },
@@ -108,31 +131,31 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 30,
     elevation: 5,
-},
-imgPontoTur: {
+  },
+  imgPontoTur: {
     width: '100%',
     height: 150,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-},
-tituloPontoTur: {
+  },
+  tituloPontoTur: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#3b3b3b'
-},
-subtituloPontoTur: {
+  },
+  subtituloPontoTur: {
     fontSize: 15,
     fontWeight: 'semibold'
-},
-areaPointsResults: {
+  },
+  areaPointsResults: {
     width: '100%',
     alignItems: 'center',
     marginTop: 30,
-},
-flatSearch: {
-  backgroundColor: '#e1e1e1',
-  width: '85%',
-  borderRadius: 15,
-}
+  },
+  flatSearch: {
+    backgroundColor: '#e1e1e1',
+    width: '85%',
+    borderRadius: 15,
+  }
 
 })
