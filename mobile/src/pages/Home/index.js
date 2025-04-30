@@ -12,6 +12,7 @@ import axios from 'axios';
 import { favoritePoint } from '../../services/favorite';
 import { getTouristPoints } from '../../services/favorite';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUsername } from '../../services/favorite';
 
 
 export default function Home() {
@@ -26,7 +27,7 @@ export default function Home() {
         async function saveData(params) {
             try {
                 const response = await getTouristPoints();
-                const name = await AsyncStorage.getItem('user')
+                const name = await getUsername();
                 setProfileUser(name)
                 setData(response)
             }
@@ -35,6 +36,7 @@ export default function Home() {
             }
         }
         saveData();
+        
     }, [])
 
 

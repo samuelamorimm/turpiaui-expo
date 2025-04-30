@@ -1,4 +1,5 @@
 import API from "./api"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export async function favoritePoint(item, setData) {
 
@@ -77,3 +78,18 @@ export async function getFavorites(setData) {
     }
 }
 
+export async function getUsername() {
+    try {
+
+        
+            const username = await AsyncStorage.getItem('userName')
+            if (!username) return ''; // Verifica se o nome de usuário é vazio
+        
+            const firstLetter = username.charAt(0).toUpperCase(); // Primeira letra maiúscula
+            const remainingLetters = username.slice(1).toLowerCase(); // Resto das letras minúsculas
+        
+            return firstLetter + remainingLetters; // Junta a primeira letra maiúscula com o resto
+    } catch (error) {
+        console.log('falha ao buscar username')
+    }
+}

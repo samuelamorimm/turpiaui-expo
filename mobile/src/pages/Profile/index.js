@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, TextInput, ImageBackground, TouchableOpacity, Button } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -7,11 +7,12 @@ import API from '../../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Nav from '../../components/Nav';
 import styles from './styles';
+import { getUsername } from '../../services/favorite';
 
 
 
 export default function Profile() {
-
+    const [profileUser, setProfileUser] = useState('')
     const navigation = useNavigation();
 
     async function logout() {
@@ -24,6 +25,10 @@ export default function Profile() {
         }
 
     }
+
+    useEffect(() => {
+        setProfileUser(getUsername())
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -43,7 +48,7 @@ export default function Profile() {
             <View style={styles.profileArea}>
                 <View style={styles.profileImg}></View>
 
-                <Text style={styles.nameProfile}>Insira um nome</Text>
+                <Text style={styles.nameProfile}>{profileUser != ''? profileUser : 'Insinra um nome'}</Text>
             </View>
 
             <View style={styles.optionsArea}>
