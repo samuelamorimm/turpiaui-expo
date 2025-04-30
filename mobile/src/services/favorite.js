@@ -80,7 +80,6 @@ export async function getFavorites(setData) {
 
 export async function getUsername() {
     try {
-
         
             const username = await AsyncStorage.getItem('userName')
             if (!username) return ''; // Verifica se o nome de usuário é vazio

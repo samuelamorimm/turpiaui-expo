@@ -17,8 +17,9 @@ import { StyleSheet } from "react-native";
     width: 150,
     height: 150,
     borderRadius: '50%',
-    borderWidth: 2,
-    borderColor: '#0F5F87',
+    backgroundColor: '#0F5F87',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   nameProfile: {
     fontSize: 25,

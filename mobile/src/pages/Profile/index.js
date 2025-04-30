@@ -46,7 +46,9 @@ export default function Profile() {
 
 
             <View style={styles.profileArea}>
-                <View style={styles.profileImg}></View>
+                <View style={styles.profileImg}>
+                    <Ionicons name='person' size={88} color='#fff' />
+                </View>
 
                 <Text style={styles.nameProfile}>{profileUser != ''? profileUser : 'Insinra um nome'}</Text>
             </View>
