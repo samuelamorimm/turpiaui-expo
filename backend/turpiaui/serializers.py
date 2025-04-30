@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import City, TouristPoint, Category, Favorite
+from .models import City, TouristPoint, Category, Favorite, Profile
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,6 +18,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        extra_kwargs = {
+            'user': {'read_only': True}
+        }
+        model = Profile
+        fields = ['id', 'first_name', 'last_name', 'image']
 
 class FavoriteSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='point.name', read_only=True)

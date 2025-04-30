@@ -68,7 +68,6 @@ export async function getTouristPoints() {
 }
 
 export async function getFavorites(setData) {
-
     try {
         const response = await API.get('/favorites/')
         setData(response.data)

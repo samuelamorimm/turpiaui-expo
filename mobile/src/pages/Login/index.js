@@ -26,11 +26,13 @@ export default function Login() {
 
         try {
             const response = await API.post('/login/', data)
-            const token = response.data.token
+            const {user, token} = response.data
             await AsyncStorage.setItem('userToken', token)
+            await AsyncStorage.setItem('userId', user.id.toString())
+            await AsyncStorage.setItem('userName', user.username)
             navigation.navigate('home')
+            
             console.log('Login Realizado com sucesso, token:', response.data.token)
-            console.log('Login Realizado com sucesso, user:', response.data.username)
         } catch (e){
             console.error('Erro ao fazer login:', e.message);
             alert('Erro, Usuário ou senha incorretos.')
@@ -75,10 +77,10 @@ export default function Login() {
 
             <View style={styles.areaForm}>
                 <View style={styles.areaInput}>
-                    <Text style={styles.label}>Email</Text>
+                    <Text style={styles.label}>Usuário</Text>
                     <TextInput
                         placeholderTextColor={'#3b3b3b'}
-                        placeholder='email@exemplo.com'
+                        placeholder='usuário'
                         style={styles.input}
                         onChangeText={(text) => setUsername(text)}
                     />
